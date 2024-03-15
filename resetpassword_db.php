@@ -15,7 +15,7 @@ if (isset($_POST['resetpw'])) {
         header("Location: resetpassword.php");
     } else {
         $hash_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("UPDATE users SET password = ?  WHERE reset_token = ? ");
+        $stmt = $conn->prepare("UPDATE users SET password = ? , reset_token = NULL WHERE reset_token = ? ");
         $stmt->execute([$hash_password, $token]);
         $_SESSION['success'] = "Reset password Successfully.";
         header("Location: resetpassword.php");
